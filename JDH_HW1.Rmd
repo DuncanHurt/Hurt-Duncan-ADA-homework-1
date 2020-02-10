@@ -1,0 +1,129 @@
+---
+title: "Homework 1"
+author: "Duncan Hurt"
+date: "February 9, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+####ANT388 (Applied Data Analysis) Spring 2020
+
+##Challenge 1
+```{r}
+#Step 1: creating the character vectors 'quote' and 'split_quote'
+quote <- "there is grandeur in this view of life, with its several powers, having been originally breathed by the Creator into a few forms or into one; and that, whilst this planet has gone circling on according to the fixed law of gravity, from so simple a beginning endless forms most beautiful and most wonderful have been, and are being evolved."
+(split_quote <- gsub("[[:punct:]]","", unlist(strsplit(quote, " "))))
+
+#Step 2: creating the character vector 'every_fourth'
+(every_fourth <- split_quote[seq(from = 4, to = length(split_quote), by = 4)])
+
+#Step 3: sorting the elements of 'every_fourth' into reverse alphabetical order
+(every_fourth <- sort(every_fourth, decreasing = TRUE))
+```
+
+
+##Challenge 2
+```{r}
+#Step 1: creating the matrix 'm1'
+(m1 <- matrix(seq(1, 159, 2), 8, 10))
+
+#Step 2: extracting row 5, column 2 from 'm1'
+m1[5, 2]
+
+#Step 3: extracting rows 5 through 7 from 'm1'
+m1[5:7, ]
+
+#Step 4: creating the matrix 'm2' (extracting rows 3 through 6, columns 4 through 9 from 'm1')
+(m2 <- m1[3:6, 4:9])
+
+#Step 5: determining the class and mode of 'm2'
+paste(class(m2), mode(m2), sep = ", ")
+```
+
+
+##Challenge 3
+```{r}
+#Step 1: creating the 4-dimensional array 'a' (but not printing it, because it's huge!)
+a <- array(400:1, c(5, 5, 4, 4))
+
+#We can conceptualize the array 'a' as being organized into 4 'groups'. Each 'group' is actually an array in and of itself, consisting of 4 matrices (such that, in total, 'a' contains 16 matrices). Each matrix consists of 5 rows and 5 columns. The array 'a' is indexed such that the expression a[1, 2, 3, 4] refers to row 1, column 2 of the third matrix in 'group' 4.
+
+#Step 2: extracting row 1, column 1 from the first matrix in 'group' 2
+(a[1, 1, 1, 2])
+
+#Step 3: extracting row 2, column 3 from the second matrix of each 'group'
+(a[2, 3, 2, ])
+
+#Step 4: extracting rows 1 through 5 and columns 1 through 5 from the third matrix in 'group' 3 (in other words, extracting the entire third matrix of 'group' 3)
+(a[1:5, 1:5, 3, 3])
+
+
+```
+
+
+##Challenge 4
+#####Okay, things get very messy below, but it's the best I could figure out... :/
+```{r}
+#Creating the character vector 'Superfamily_Lorisoidea', where each element is a string indicating the name of a Family (note the elements themselves are not assigned names)
+Superfamily_Lorisoidea <- c("Family Lorisidae", "Family Galagidae")
+
+#Creating the list 'Infraorder_Lorisiformes', whose sole element is 'Superfamily_Lorisoidea'. Now that 'Superfamily_Lorisoidea' exists as an element in a list, it can be assigned a name.
+Infraorder_Lorisiformes <- list(Superfamily_Lorisoidea)
+names(Infraorder_Lorisiformes) <- "Superfamily Lorisoidea"
+
+#Here we simply repeat the steps shown above for the next Superfamily/Infraorder
+Superfamily_Lemuroidea <- c("Family Cheirogaleidae", "Family Lepilemuridae", "Family Indriidae", "Family Lemuridae", "Family Daubentoniidae")
+Infraorder_Lemuriformes <- list(Superfamily_Lemuroidea)
+names(Infraorder_Lemuriformes) <- "Superfamily Lemuroidea"
+
+#Repeating the above process to create the first Suborder and name its Infraorders
+Suborder_Strepsirhini <- list(Infraorder_Lorisiformes, Infraorder_Lemuriformes)
+names(Suborder_Strepsirhini) <- c("Infraorder Lorisiformes", "Infraorder Lemuriformes")
+
+
+#From here on out I follow the same pattern shown above. It is tedious and difficult to follow, especially as it becomes more complicated with the introduction of Parvorders, but the basic process remains the same.
+
+
+Superfamily_Tarsioidea <- "Family Tarsiidae"
+Infraorder_Tarsiiformes <- list(Superfamily_Tarsioidea)
+names(Infraorder_Tarsiiformes) <- "Superfamily Tarsioidea"
+
+Superfamily_Ceboidea <- c("Family Cebidae", "Family Atelidae", "Family Pitheciidae")
+Parvorder_Platyrrhini <- list(Superfamily_Ceboidea)
+names(Parvorder_Platyrrhini) <- "Superfamily Ceboidea"
+
+Superfamily_Hominoidea <- c("Family Hylobatidae", "Family Hominidae")
+Superfamily_Cercopithecoidea <- "Family Cercopithecidae"
+Parvorder_Catarrhini <- list(Superfamily_Hominoidea, Superfamily_Cercopithecoidea)
+names(Parvorder_Catarrhini) <- c("Superfamily Hominoidea", "Superfamily Cercopithecoidea")
+
+Infraorder_Simiiformes <- list(Parvorder_Platyrrhini, Parvorder_Catarrhini)
+names(Infraorder_Simiiformes) <- c("Parvorder Platyrrhini", "Parvorder Catarrhini")
+
+Suborder_Haplorhini <- list(Infraorder_Tarsiiformes, Infraorder_Simiiformes)
+names(Suborder_Haplorhini) <- c("Infraorder Tarsiiformes", "Infraorder Simiiformes")
+
+
+#Finally, we can combine the two suborders to create our final list!
+Order_Primates <- list(Suborder_Strepsirhini, Suborder_Haplorhini)
+names(Order_Primates) <- c("Suborder Strepsirhini", "Suborder Haplorhini")
+
+Order_Primates
+
+
+#creating 'nwm' by subsetting 'Order_Primates' (with each instance of bracket-action taking us deeper into the nested lists)
+(nwm <- Order_Primates[["Suborder Haplorhini"]][["Infraorder Simiiformes"]]["Parvorder Platyrrhini"])
+
+#determining class and mode of 'nwm'
+paste(class(nwm), mode(nwm), sep = ", ")
+
+
+#extracting Tarsiers - same thing as above but with $ instead of []
+Order_Primates$`Suborder Haplorhini`$`Infraorder Tarsiiformes`$`Superfamily Tarsioidea`
+
+```
+
+##Thank you!
