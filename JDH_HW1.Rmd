@@ -1,7 +1,7 @@
 ---
 title: "Homework 1"
 author: "Duncan Hurt"
-date: "February 9, 2020"
+date: "February 10, 2020"
 output: html_document
 ---
 
@@ -65,7 +65,7 @@ a <- array(400:1, c(5, 5, 4, 4))
 
 
 ## Challenge 4
-##### Okay, things get very messy below, but it's the best I could figure out... :/
+##### Okay, things get messy below, but it's the best I could figure out...
 ```{r}
 #Creating the character vector 'Superfamily_Lorisoidea', where each element is a string indicating the name of a Family (the elements themselves are not assigned names)
 Superfamily_Lorisoidea <- c("Family Lorisidae", "Family Galagidae")
