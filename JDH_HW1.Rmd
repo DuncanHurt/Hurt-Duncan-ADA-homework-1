@@ -9,9 +9,9 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-####ANT388 (Applied Data Analysis) Spring 2020
+#### ANT388 (Applied Data Analysis) Spring 2020
 
-##Challenge 1
+## Challenge 1
 ```{r}
 #Step 1: creating the character vectors 'quote' and 'split_quote'
 quote <- "there is grandeur in this view of life, with its several powers, having been originally breathed by the Creator into a few forms or into one; and that, whilst this planet has gone circling on according to the fixed law of gravity, from so simple a beginning endless forms most beautiful and most wonderful have been, and are being evolved."
@@ -25,7 +25,7 @@ quote <- "there is grandeur in this view of life, with its several powers, havin
 ```
 
 
-##Challenge 2
+## Challenge 2
 ```{r}
 #Step 1: creating the matrix 'm1'
 (m1 <- matrix(seq(1, 159, 2), 8, 10))
@@ -44,7 +44,7 @@ paste(class(m2), mode(m2), sep = ", ")
 ```
 
 
-##Challenge 3
+## Challenge 3
 ```{r}
 #Step 1: creating the 4-dimensional array 'a' (but not printing it, because it's huge!)
 a <- array(400:1, c(5, 5, 4, 4))
@@ -64,10 +64,10 @@ a <- array(400:1, c(5, 5, 4, 4))
 ```
 
 
-##Challenge 4
-#####Okay, things get very messy below, but it's the best I could figure out... :/
+## Challenge 4
+##### Okay, things get very messy below, but it's the best I could figure out... :/
 ```{r}
-#Creating the character vector 'Superfamily_Lorisoidea', where each element is a string indicating the name of a Family (note the elements themselves are not assigned names)
+#Creating the character vector 'Superfamily_Lorisoidea', where each element is a string indicating the name of a Family (the elements themselves are not assigned names)
 Superfamily_Lorisoidea <- c("Family Lorisidae", "Family Galagidae")
 
 #Creating the list 'Infraorder_Lorisiformes', whose sole element is 'Superfamily_Lorisoidea'. Now that 'Superfamily_Lorisoidea' exists as an element in a list, it can be assigned a name.
@@ -126,4 +126,4 @@ Order_Primates$`Suborder Haplorhini`$`Infraorder Tarsiiformes`$`Superfamily Tars
 
 ```
 
-##Thank you!
+### Thanks!
